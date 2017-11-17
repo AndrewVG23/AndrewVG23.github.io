@@ -10,22 +10,22 @@
     -- this grabs it from the CS server, which
     -- might take a while
     -->
-  <canvas id="myCanvas" 
+  <canvas id="myCanvas"
 	   width="600" height="600"
 	   style="border:1px solid #000;">
   </canvas><br/>
   <input id="slider1" type="range" min="0" max="200" />
   <input id="slider2" type="range" min="0" max="200" />
-  <script src="http://graphics.cs.wisc.edu/JS/twgl-full.min.js">
-  
+  <script src="/twgl-full.min.js">
+
   var imageObj = new Image();
 
       imageObj.onload = function() {
         context.drawImage(imageObj, 69, 50);
       };
       imageObj.src = ';
-  
-  
+
+
   </script>
 </head>
 <body>
@@ -37,13 +37,13 @@ document.getElementById("myCanvas").style.backgroundColor =
   'rgba(50, 58, 79, 1)';
   var context = canvas.getContext('2d');
   var m4 = twgl.m4;
-  
+
   var slider1 = document.getElementById('slider1');
   slider1.value = 0;
   var slider2 = document.getElementById('slider2');
   slider2.value = 0;
-                  
-                  
+
+
 
   function moveToTx(x,y,z,Tx) {
     var loc = [x,y,z];
@@ -56,17 +56,17 @@ document.getElementById("myCanvas").style.backgroundColor =
     var locTx = m4.transformPoint(Tx,loc);
     context.lineTo(locTx[0]+250,-locTx[1]+250);
   }
-                  
-                                    
+
+
  function drawFighterLines(Tx) {
-    
+
     moveToTx(225,250,300,Tx);lineToTx(280,100,300,Tx);
      moveToTx(225,250,300,Tx);lineToTx(332,250,300,Tx);
      moveToTx(225,250,300,Tx);lineToTx(280,400,300,Tx);
      moveToTx(225,250,300,Tx);lineToTx(170,400,300,Tx);
      moveToTx(225,250,300,Tx);lineToTx(118,250,300,Tx);
      moveToTx(225,250,300,Tx);lineToTx(170,100,300,Tx);
-   
+
     moveToTx(225,250,100,Tx);lineToTx(280,100,100,Tx);
      moveToTx(225,250,100,Tx);lineToTx(332,250,100,Tx);
      moveToTx(225,250,100,Tx);lineToTx(280,400,100,Tx);
@@ -76,12 +76,12 @@ document.getElementById("myCanvas").style.backgroundColor =
 
    context.strokeStyle = "black";
     context.stroke();
-   
+
          }
-                
-                  
+
+
   function drawFighter(Tx) {
-      
+
     context.translate(0,-200)
     //outer edge of wing
     moveToTx(170,100,100,Tx);lineToTx(280,100,100,Tx);
@@ -89,7 +89,7 @@ document.getElementById("myCanvas").style.backgroundColor =
     lineToTx(280,400,100,Tx);lineToTx(170,400,100,Tx);
     lineToTx(118,250,100,Tx);
     lineToTx(170,100,100,Tx);
-    
+
      //outer edge of other wing
     moveToTx(170,100,300,Tx);lineToTx(280,100,300,Tx);
     lineToTx(332,250,300,Tx);
@@ -101,91 +101,91 @@ document.getElementById("myCanvas").style.backgroundColor =
     lineToTx(255,250,230,Tx);
     lineToTx(255,250,170,Tx);
     lineToTx(195,250,170,Tx);
-    
+
      moveToTx(195,220,170,Tx);lineToTx(195,220,230,Tx);
     lineToTx(255,220,230,Tx);
     lineToTx(255,220,170,Tx);
     lineToTx(195,220,170,Tx);
-        
+
     context.fillStyle = "grey";
     context.fill();
- 
+
   }
-                  
+
 function drawLaser(Tx) {
-       
+
     moveToTx(170,100,100,Tx);lineToTx(280,100,100,Tx);
     context.strokeStyle = "red";
     context.lineWidth=10;
-    context.stroke();               
+    context.stroke();
     context.fillStyle = "red";
     context.fill();
-     
+
       }
- 
-                  
+
+
 function drawText(Tx){
-                   
+
 context.font = "80px Serif";
 context.fillStyle = "Black";
 context.textAlign = "center";
   context.strokeStyle = "yellow";
   context.lineWidth = 5;
   context.strokeText(Tx,canvas.width/2,canvas.height/2);
-context.fillText(Tx, canvas.width/2, canvas.height/2); 
+context.fillText(Tx, canvas.width/2, canvas.height/2);
 
                   }
-                  
-                  
+
+
 
 
   function draw() {
     // hack to clear the canvas fast
     canvas.width = canvas.width;
-    
-    
+
+
     var angle1 = slider1.value*0.05;
     var angle2 = slider2.value*0.01*Math.PI;
     var axis = [10,10,0];
-    
+
     var Tmodel=m4.axisRotation(axis,0.6);
 
     var eye=[200,300,500];
     var target=[0,0,0];
     var up=[0,0,1];
     var Tcamera=m4.inverse(m4.lookAt(eye,target,up));
-    
-  
-    
+
+
+
     var Txx = m4.axisRotation([1,0,0],angle1*0.2);
     var Txxx = m4.scale(Txx,[1,1,1]);
 
-        
+
     var xTxxx = m4.multiply(Tmodel,Txxx);
-    
+
     Tmodel = m4.multiply(xTxxx,Txxx);
-    
+
     var Tmodelview=m4.multiply(xTxxx,Tcamera);
-    
+
      context.save();
     context.translate(300,0);
     context.scale((10-angle1)/10, (10-angle1)/10);
     context.translate(-300,360-angle1*80);
     context.translate(0,-angle1*30);
-    
+
     drawText("twglWARS");
     context.restore();
-    
-   
-    context.save();    
+
+
+    context.save();
     context.translate(300,0);
     context.scale((10-angle1)/10, (10-(angle1-1))/10);
     context.scale(1.3,1);
     context.translate(-300,360-(angle1-1)*80);
-    context.translate(0,-(angle1-1)*30); 
+    context.translate(0,-(angle1-1)*30);
     drawText("In a Galaxy Far Far Away...");
     context.restore();
-    
+
     context.save();
     context.translate(300,0);
     context.scale((10-angle1-1.5)/10, (10-(angle1-1.5))/10);
@@ -194,37 +194,37 @@ context.fillText(Tx, canvas.width/2, canvas.height/2);
     context.translate(0,-(angle1-1.5)*30);
     drawText("By: Andrew");
     context.restore();
-    
+
     context.translate(50,300);
     context.translate(0,-Math.sin(angle1)*0);
     Tmodel = m4.multiply(Tmodel,Txx);
     Tmodelview = m4.setTranslation(Tmodel,[-angle1*70,.2,0]);
-    
-     
-    
+
+
+
     context.save();
     context.translate(-angle1*100,-100);
     if(angle1>.7){
        drawLaser(Tmodelview);
     }
-     context.restore();   
-    
+     context.restore();
+
     context.save();
     context.translate(120-angle1*100,-160);
     if(angle1>1.4){
        drawLaser(Tmodelview);
-      
+
     }
      context.restore();
-     
+
     drawFighter(Tmodelview);
     drawFighterLines(Tmodelview);
     context.restore();
-    
+
 
     drawAxes(Tcamera);
-  
-    
+
+
   }
 
   slider1.addEventListener("input",draw);
