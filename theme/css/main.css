@@ -47,7 +47,33 @@ h3, h4, h5, h6 { margin-top: .8em; }
 hr { border: 2px solid #EEEEEE; }
 
 /* Anchors */
-.cn-slide:target h2{
+.cn-container{
+	width: 60%;
+	min-width: 300px;
+	max-width: 820px;
+	margin: 10px auto 0 auto;
+	text-align: left;
+	position: relative;
+}
+.cn-container h2{
+	font-family: 'BebasNeueRegular', 'Arial Narrow', Arial, sans-serif;
+	color: #fff;
+	position: absolute;
+	z-index: 1000;
+	text-shadow: 0 0 1px rgba(255,255,255,0.8), 1px 1px 1px rgba(0,0,0,0.2);
+	font-size: 80px;
+	line-height: 80px;
+	top: 0px;
+	right: 200px;
+	white-space: nowrap;
+	opacity: 0;
+	-webkit-transition: all 0.3s linear 0.4s;
+	-moz-transition: all 0.3s linear 0.4s;
+	-o-transition: all 0.3s linear 0.4s;
+	-ms-transition: all 0.3s linear 0.4s;
+	transition: all 0.3s linear 0.4s;
+}
+.cn-container .cn-slide:target h2{
 	right: 0px;
 	opacity: 1;
 }
