@@ -252,11 +252,10 @@ document.querySelector('button').addEventListener('click', function() {
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
-  height: 2.4em;
+  height: 3.6em;
   line-height: 1.2em;
 	width: 600px;
-
-	border-radius: 10px;
+  border-radius: 10px;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 }
