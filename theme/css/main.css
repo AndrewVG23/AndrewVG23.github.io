@@ -155,7 +155,7 @@ document.querySelector('button').addEventListener('click', function() {
   document.querySelector('#content').style.height= 'auto';
   this.style.display= 'none';
 });
-  
+
 
 /*
 	Header
@@ -262,6 +262,7 @@ document.querySelector('button').addEventListener('click', function() {
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
+  height: 3em;
 	width: 760px;
 
 	border-radius: 10px;
