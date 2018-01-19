@@ -262,8 +262,9 @@ document.querySelector('button').addEventListener('click', function() {
 	margin-bottom: 2em;
 	overflow: hidden;
 	padding: 20px 20px;
-  height: 1em;
-	width: 760px;
+  height: 3em;
+  line-height: 1.2em;
+	width: 300px;
 
 	border-radius: 10px;
 	-moz-border-radius: 10px;
